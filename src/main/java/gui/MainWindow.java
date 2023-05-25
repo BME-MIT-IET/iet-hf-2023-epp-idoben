@@ -1,27 +1,17 @@
-package GUI;
+package gui;
 
 import com.main.Game;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.LinkedList;
 
 /**
  * A főablakot megjelenítő swing grafikus osztály
  */
 public class MainWindow  extends JFrame{
-    /**
-     * A menüsáv navigációs gombjai
-     */
-    private JMenuBar menuBar = new JMenuBar();
     private JMenuItem newGameButton = new JMenuItem("New game");
     private JMenuItem loadGameButton = new JMenuItem("Load game");
     private JMenuItem saveGameButton = new JMenuItem("Save game");
@@ -124,11 +114,11 @@ public class MainWindow  extends JFrame{
             }
             //Kör átugrása
             if(e.getSource()==skipRound && !Game.gameEnded){
-                new Thread(()->Game.skip()).start();
+                new Thread(Game::skip).start();
             }
             //Tárgy felvétele
             if(e.getSource()==pickupButton && !Game.gameEnded){
-                new Thread(()->Game.pickup()).start();
+                new Thread(Game::pickup).start();
             }
             //Ágens kenése
             if(e.getSource()==rubButton && !Game.gameEnded){
@@ -153,39 +143,10 @@ public class MainWindow  extends JFrame{
     public void virologistClicked(String id){
         if(!Game.gameEnded) {
             if (rub) {
-                JPanel panel = new JPanel();
-                panel.add(new JLabel("Select code to rub: "));
-                DefaultComboBoxModel model = new DefaultComboBoxModel();
-                for (String value : Game.currentRound.getCodes()) {
-                    model.addElement(value);
-                }
-                JComboBox comboBox = new JComboBox(model);
-                panel.add(comboBox);
-
-                int iResult = JOptionPane.showConfirmDialog(null, panel, "Rub", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                switch (iResult) {
-                    case JOptionPane.OK_OPTION:
-                        new Thread(()->Game.rub(id, (String) comboBox.getSelectedItem())).start();
-                        break;
-                }
+                handleRub(id);
             }
             if (rob) {
-                JPanel panel = new JPanel();
-                panel.add(new JLabel("Select equipment to rob: "));
-                DefaultComboBoxModel model = new DefaultComboBoxModel();
-                for (String value : Game.getVirologist(id).getEquipments()) {
-                    model.addElement(value);
-                }
-                JComboBox comboBox = new JComboBox(model);
-                panel.add(comboBox);
-
-                int iResult = JOptionPane.showConfirmDialog(null, panel, "Rob", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                switch (iResult) {
-                    case JOptionPane.OK_OPTION:
-                        int index = Game.getVirologist(id).getEquipments().indexOf((String) comboBox.getSelectedItem()) + 1;
-                        new Thread(()->Game.rob(id, index)).start();
-                        break;
-                }
+                handleRob(id);
             }
             if (kill) {
                 new Thread(()->Game.kill(id)).start();
@@ -194,6 +155,39 @@ public class MainWindow  extends JFrame{
         rub = false;
         rob = false;
         kill = false;
+    }
+
+    private void handleRub(String id){
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Select code to rub: "));
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (String value : Game.currentRound.getCodes()) {
+            model.addElement(value);
+        }
+        JComboBox comboBox = new JComboBox(model);
+        panel.add(comboBox);
+
+        int iResult = JOptionPane.showConfirmDialog(null, panel, "Rub", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(iResult == JOptionPane.OK_OPTION) {
+            new Thread(()->Game.rub(id, (String) comboBox.getSelectedItem())).start();
+        }
+    }
+
+    private void handleRob(String id){
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Select equipment to rob: "));
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (String value : Game.getVirologist(id).getEquipments()) {
+            model.addElement(value);
+        }
+        JComboBox comboBox = new JComboBox(model);
+        panel.add(comboBox);
+
+        int iResult = JOptionPane.showConfirmDialog(null, panel, "Rob", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(iResult == JOptionPane.OK_OPTION) {
+            int index = Game.getVirologist(id).getEquipments().indexOf(comboBox.getSelectedItem()) + 1;
+            new Thread(()->Game.rob(id, index)).start();
+        }
     }
 
 
@@ -245,8 +239,10 @@ public class MainWindow  extends JFrame{
         public ClickListener(JFrame window){
             this.window = window;
         }
+
         @Override
         public void mouseClicked(MouseEvent e) {
+            //az egér kattintás nincs lekezelve, így csak egy üres metódus
         }
 
         /**
@@ -296,8 +292,9 @@ public class MainWindow  extends JFrame{
         this.addMouseListener(new ClickListener(this));
 
         //Alul a szövegek amik kiírják a soronlévő virológus adatait
+        final String arialFont = "Arial";
         Color orange = new Color(255,103,0);
-        Font labelFont = new Font("Arial", Font.PLAIN, 25);
+        Font labelFont = new Font(arialFont, Font.PLAIN, 25);
         currentRound.setFont(labelFont);
         learntCodes.setFont(labelFont);
         remainingSteps.setFont(labelFont);
@@ -306,7 +303,7 @@ public class MainWindow  extends JFrame{
         equipment.setFont(labelFont);
         activeEffects.setFont(labelFont);
         skipRound.setForeground(Color.red);
-        skipRound.setFont(new Font("Arial", Font.BOLD, 40));
+        skipRound.setFont(new Font(arialFont, Font.BOLD, 40));
         skipRound.setBackground(Color.CYAN);
         skipRound.setBorderPainted(false);
         skipRound.setFocusPainted(false);
@@ -318,10 +315,14 @@ public class MainWindow  extends JFrame{
         newGameButton.addActionListener(listener);
         loadGameButton.addActionListener(listener);
         saveGameButton.addActionListener(listener);
-        menuBar.add(newGameButton);
-        menuBar.add(loadGameButton);
-        menuBar.add(saveGameButton);
-        this.setJMenuBar(menuBar);
+        /**
+         * A menüsáv navigációs gombjai
+         */
+        JMenuBar topMenuBar = new JMenuBar();
+        topMenuBar.add(newGameButton);
+        topMenuBar.add(loadGameButton);
+        topMenuBar.add(saveGameButton);
+        this.setJMenuBar(topMenuBar);
 
         //Mező téglalap
         JPanel green = new JPanel();
@@ -338,10 +339,10 @@ public class MainWindow  extends JFrame{
         rubButton.setPreferredSize(new Dimension(120,60));  rubButton.setFocusPainted(false); rubButton.setBorderPainted(false);
         killButton.setPreferredSize(new Dimension(120,60)); killButton.setFocusPainted(false); killButton.setBorderPainted(false);
         pickupButton.setPreferredSize(new Dimension(160,60)); pickupButton.setFocusPainted(false); pickupButton.setBorderPainted(false);
-        rubButton.setFont(new Font("Arial", Font.PLAIN, 34));
-        robButton.setFont(new Font("Arial", Font.PLAIN, 34));
-        killButton.setFont(new Font("Arial", Font.PLAIN, 34));
-        pickupButton.setFont(new Font("Arial", Font.PLAIN, 34));
+        rubButton.setFont(new Font(arialFont, Font.PLAIN, 34));
+        robButton.setFont(new Font(arialFont, Font.PLAIN, 34));
+        killButton.setFont(new Font(arialFont, Font.PLAIN, 34));
+        pickupButton.setFont(new Font(arialFont, Font.PLAIN, 34));
         robButton.setForeground(Color.red);
         rubButton.setForeground(Color.red);
         killButton.setForeground(Color.red);
