@@ -12,10 +12,12 @@
 4. Paralize vírus kenése
 5. Paralize vírus hatása
 6. A paralized állapotban lévő virológus kirablása
-7.
-8.
-9.
+7. Equipment felvétele a mezőről
+8. Maximális kapacitás elérése equipmentekből
+9. Genetikai kód megtanulása
 10.
+
+A tesztelés során a célunk minél több ui funkció kipróbálása manuális módon.
 
 ## Tesztek végrehajtása:
 
@@ -108,3 +110,40 @@ Tesztelés közben: A V1 virológus rabolni akar a V2-től, és feljön egy abla
 A képeken látható, hogy a rabló virológus megkapja a paralized virológus eqipmentjét aki pedig elveszti azt. Tesztelés utáni állapot:
 
 ![](manualis_teszteles_imgs/6_after.png)
+
+## 7. Equipment felvétele a mezőről
+
+Tesztelt funkció: A teszt során azt ellenőrizzük, hogy egy virológus fel tud-e venni egy equipmentet a mezőről, és utána bekerül-e az equipmentek közé.
+
+Teszt előtti állapot: látjuk, hogy a V1 virológus a mezőn áll, ahol található egy Protection equipment. 
+
+![](manualis_teszteles_imgs/7_before.png)
+
+Teszt utáni állapot: Látható, hogy sikeresen felvettük a mezőről az equipmentet, és bekerült az inventory-ba, valamint a mezőről eltűnt.
+
+![](manualis_teszteles_imgs/7_after.png)
+
+## 8. Maximális kapacitás elérése equipmentekből
+
+Elvárt viselkedés: A virológus már rendelkezik 3 equipmentel, de megpróbál felvenni egy 4.et. Az equipment nem kerül a virológushoz és lent marad a mezőn.
+
+Tesztelés előtti állapot: A V1 virológus invevóntoryjában 3 db. equipment található, és olyan mezőn áll, ahol van még egy 4.
+
+![](manualis_teszteles_imgs/8_before.png)
+
+Tesztelés utáni állapot: Ahogyan a képen is látszik az equipment a mezőn maradt és a virológus nem kapta meg, valamint a lépésszáma csökkent, ami mutatja, hogy megpróbálta felvenni a mezőről.
+
+
+![](manualis_teszteles_imgs/8_after.png)
+
+## 9. Genetikai kód megtanulása
+
+Elvárt viselkedés: A virológus aki még nem rendelkezik egy adott vírussal, egy mezőn van ahol található ez a vírus. A pickupra kattintva megtanulja a vírus genetikai kódját, de a vírus a mezőn marad, mivel az permanens.
+
+Tesztelés előtti állapot: A V1 virológus barlang mezőn áll, és nincs még egyetlen megtanult genetikai kódja sem:
+
+![](manualis_teszteles_imgs/9_before.png)
+
+Ahogyan az a képen is látszik, a vírust a virológus megtanulta és a genetikai kód a mezőn maradt, mert azt megtanulhatja más is.
+
+![](manualis_teszteles_imgs/9_after.png)
