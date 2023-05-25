@@ -1,9 +1,0 @@
-12×4
-S1() W2(Ra) S3(V3) S4() L13(Cp) H14(Ep1) H15(Es1) L16(Cv) W41(Rn) W42(Ra) L43(Cf) W44(Ra)
-L5(Co) H6(Eg1) H7(Ea1) L8(Cv) W17(Rn) W18(Rn) L19(Cb) W20(Ra) S33() W34(Ra) S35() S36(V2)
-W9(Ra) W10(Rn) L11(Cb) W12(Ra) S21() W22(Ra) S23(V4) S24() S45() W46(Rn) S47(V1) S48()
-L25(Cp) H26(Eg2) H27(Es3) L28(Cv) W29(Rn) W30(Ra) L31(Cf) W32(Rn) L37(Cf) H38() H39(Ep6) L40(Cv)
-V1 - - - 0;0 5
-V2 - - - 0;0 0
-V3 - - - 0;0 0
-V4 - - - 0;0 0

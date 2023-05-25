@@ -1,7 +1,0 @@
-4x3
-S1() W2() L3(Co) S4() 
-S5() S6(V1) W7() L8(V2;V3;Cv) 
-W9(Ra) L10(Cp) W11() L12(Cp) 
-V1 Eg1(1) - Cp 5;6 5
-V2 - - Co;Cv 0;0 0
-V3 - - Co;Cp 1;1 0

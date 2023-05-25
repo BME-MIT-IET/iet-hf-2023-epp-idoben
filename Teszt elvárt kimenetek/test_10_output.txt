@@ -1,4 +1,0 @@
-2x1
-S1() L2(V1;Cp)
-V1 - - Cp;Cv;Co;Cf 0;0 1
-GAME OVER
