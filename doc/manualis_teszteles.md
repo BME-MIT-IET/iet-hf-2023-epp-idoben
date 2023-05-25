@@ -15,7 +15,7 @@
 7. Equipment felvétele a mezőről
 8. Maximális kapacitás elérése equipmentekből
 9. Genetikai kód megtanulása
-10.
+10. Összes vírus megtanulása, játék vége
 
 A tesztelés során a célunk minél több ui funkció kipróbálása manuális módon.
 
@@ -147,3 +147,20 @@ Tesztelés előtti állapot: A V1 virológus barlang mezőn áll, és nincs még
 Ahogyan az a képen is látszik, a vírust a virológus megtanulta és a genetikai kód a mezőn maradt, mert azt megtanulhatja más is.
 
 ![](manualis_teszteles_imgs/9_after.png)
+
+## 10. Összes vírus megtanulása, játék vége
+
+Elvárt viselkedés: Amikor a virológus az utolsó vírust is megtanulta, akkor a játéknak vége lesz.
+
+Teszt előtti állapot: A képen látható, hogy V1 virológus megtanult már 3 genetikai kódot, a nyeréshez szükséges 4-ből, és olyan mezőn áll, ahol az utolsót is megtanulhatja.
+
+![](manualis_teszteles_imgs/10_before.png)
+
+Ahogyan az a képen is látszik a játéknak vége lett, hiszen nyert a V1 játékos az utolsó genetikai kód megtanulásával:
+
+![](manualis_teszteles_imgs/10_after.png)
+
+
+## Összefoglalás:
+
+A tesztelés során 10-ből 9 helyesen, az elvárt módon működött. Nehézségeket egyrészt az okozott, hogy már emlékeztünk a megvalósított projekt részleteire, másrészt a UI nem volt valami felhasználóbarát. Látható, hogy a projektlabor tárgy esetén nem fektettünk nagy hangsúlyt a felhasználói élményre, pedig egy játék esetén ez egy fontos szempont lenne. 
