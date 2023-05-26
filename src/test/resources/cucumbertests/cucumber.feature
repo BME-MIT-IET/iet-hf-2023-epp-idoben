@@ -58,3 +58,8 @@ Feature: Virologist stepping and collecting equipment
     And the virologist has 10 amino acids
     When the virologist tries to pick up the amino acid
     Then the amino acid stays on the field
+
+  Scenario: A virologist collects a virus
+    Given a virologist and a lab with a FullProt
+    When the virologist picks up the virus
+    Then the virologist gets the virus

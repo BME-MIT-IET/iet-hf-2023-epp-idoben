@@ -1,14 +1,12 @@
 package cucumbertests;
 
+import agent.FullProt;
 import com.main.Virologist;
 import equipment.Axe;
 import equipment.Gloves;
 import equipment.ProtSuit;
 import equipment.Sack;
-import field.Field;
-import field.SafeHouse;
-import field.Simple;
-import field.WareHouse;
+import field.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,7 +22,9 @@ public class StepDefinitions {
     static SafeHouse safeHouse2;
     static SafeHouse safeHouse3;
     static WareHouse warehouse1;
+    static Lab lab;
     static Aminoacid aminoacid;
+    static FullProt fullProt;
     static ProtSuit p1;
     static ProtSuit p2;
     static Sack s1;
@@ -92,6 +92,14 @@ public class StepDefinitions {
         v1.PickupResource(new Aminoacid());
     }
 
+    @Given("a virologist and a lab with a FullProt")
+    public void aVirologistAndALabWithAFullProt() {
+        v1 = new Virologist("Virologist");
+        fullProt = new FullProt("Cf", 5, null, 5, 5);
+        lab = new Lab("Lab", fullProt, false, 0, 0);
+        lab.Accept(v1);
+    }
+
 
     @When("the virologist steps on the safehouse with a ProtSuit")
     public void step1() {
@@ -110,6 +118,11 @@ public class StepDefinitions {
 
     @When("the virologist tries to pick up the amino acid")
     public void theVirologistTriesToPickUpTheAminoAcid() {
+        v1.Collect();
+    }
+
+    @When("the virologist picks up the virus")
+    public void theVirologistPicksUpTheVirus() {
         v1.Collect();
     }
 
@@ -155,5 +168,10 @@ public class StepDefinitions {
     @Then("the amino acid stays on the field")
     public void theAminoAcidStaysOnTheField() {
         assertTrue(warehouse1.toString().contains("Ra"));
+    }
+
+    @Then("the virologist gets the virus")
+    public void theVirologistGetsTheVirus() {
+        assertEquals(v1.getCodes().get(0).toString(), "Cf");
     }
 }
