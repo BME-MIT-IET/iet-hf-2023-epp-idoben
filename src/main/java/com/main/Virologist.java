@@ -35,14 +35,6 @@ public class Virologist {
      */
     private ArrayList<Resource> resources = new ArrayList<Resource>();
     /**
-     * Kenéshez szükséges amino mennyiség
-     */
-    private final int requiredAmino = 5;
-    /**
-     * Kenéshez szükséges nucleo mennyiség
-     */
-    private final int requiredNucleo = 8;
-    /**
      * A maximális nyersanyag szám
      */
     private final int maxResourceCount = 10;
@@ -447,39 +439,38 @@ public class Virologist {
      */
     public String toString(){
         String s = "";
-        String sub = "";
-        if(equipment.size()==0){
+        StringBuilder sub = new StringBuilder();
+        if(equipment.isEmpty()){
             s+="-";
         }
         for(Equipment e : equipment){
-            if(!sub.equals(""))
-                sub+=";";
-            sub+=e.toString();
+            if(!sub.toString().equals(""))
+                sub.append(";");
+            sub.append(e.toString());
         }
         s+=sub + " ";
-        sub="";
+        sub = new StringBuilder();
 
-        if(activeeffects.size()==0){
+        if(activeeffects.isEmpty()){
             s+="-";
         }
         for(Effect e : activeeffects){
-            if(!sub.equals(""))
-                sub+=";";
-            sub+=e.toString();
+            if(!sub.toString().equals(""))
+                sub.append(";");
+            sub.append(e.toString());
         }
         s+=sub + " ";
-        sub="";
+        sub = new StringBuilder();
 
-        if(knownagents.size()==0){
+        if(knownagents.isEmpty()){
             s+="-";
         }
         for(Agent e : knownagents){
-            if(!sub.equals(""))
-                sub+=";";
-            sub+=e.getId();
+            if(!sub.toString().equals(""))
+                sub.append(";");
+            sub.append(e.getId());
         }
         s+=sub + " ";
-        sub="";
 
         int ra=0;
         int rn=0;
