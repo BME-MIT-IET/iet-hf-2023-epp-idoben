@@ -13,6 +13,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import resources.Aminoacid;
+import resources.Nucleotid;
 
 import static org.junit.Assert.*;
 
@@ -82,7 +83,7 @@ public class StepDefinitions {
         warehouse1 = new WareHouse(aminoacid, "warehouse1", 1, 1);
         warehouse1.Accept(v1);
     }
-    @Given("the virologist has 10 amino acids")
+    @Given("the virologist has 10 resources of each")
     public void theVirologistHasAminoAcids() {
         v1.PickupResource(new Aminoacid());
         v1.PickupResource(new Aminoacid());
@@ -94,6 +95,16 @@ public class StepDefinitions {
         v1.PickupResource(new Aminoacid());
         v1.PickupResource(new Aminoacid());
         v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
+        v1.PickupResource(new Nucleotid());
     }
 
     @Given("a virologist and a lab with a FullProt")
@@ -105,7 +116,7 @@ public class StepDefinitions {
     }
 
     @Given("the virologist has {string}")
-    public void theVirologistHasOblivion(String arg0) {
+    public void theVirologistHasAgent(String arg0) {
         switch (arg0) {
             case "Oblivion" -> agent = new Oblivion("Co", v1, 1, 1);
             case "Paralysis" -> agent = new Paralysis("Cp", 3, v1, 1, 1);
@@ -154,6 +165,11 @@ public class StepDefinitions {
     @When("the second virologist tries to rob the first one")
     public void theSecondVirologistTriesToRobTheFirstOne() {
         v2.StealEqFrom(v1, g1);
+    }
+
+    @When("the virologist rubs paralizis on the other virologist")
+    public void theVirologistRubsParalizisOnTheOtherVirologist() {
+        v1.ThrowAgentOn(v2, agent);
     }
 
 
@@ -220,5 +236,11 @@ public class StepDefinitions {
     public void theSecondVirologistHasTheItem() {
         assertFalse(v2.getEquipments().isEmpty());
         assertSame(v2.getEquipment(0), g1);
+    }
+
+
+    @Then("the other virologist is paralized")
+    public void theOtherVirologistIsParalized() {
+        assertTrue(v2.toString().contains("Cp"));
     }
 }

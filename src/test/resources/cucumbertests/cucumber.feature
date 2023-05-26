@@ -55,7 +55,7 @@ Feature: Virologist stepping and collecting equipment
 
   Scenario: A Virologist tries to collect too many resources
     Given a virologist and a warehouse with an amino acid
-    And the virologist has 10 amino acids
+    And the virologist has 10 resources of each
     When the virologist tries to pick up the amino acid
     Then the amino acid stays on the field
 
@@ -80,3 +80,11 @@ Feature: Virologist stepping and collecting equipment
     When the second virologist tries to rob the first one
     Then then first virologist no longer has the item
     And the second virologist has the item
+
+  Scenario: A virologist rubs a paralize virus on another virologist
+    Given a virologist and a lab with a FullProt
+    And the virologist has 10 resources of each
+    And the virologist has "Paralysis"
+    And another virologist
+    When the virologist rubs paralizis on the other virologist
+    Then the other virologist is paralized
