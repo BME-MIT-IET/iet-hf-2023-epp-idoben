@@ -1,6 +1,9 @@
 package cucumbertests;
 
+import agent.Agent;
 import agent.FullProt;
+import agent.Oblivion;
+import com.main.Game;
 import com.main.Virologist;
 import equipment.Axe;
 import equipment.Gloves;
@@ -25,11 +28,13 @@ public class StepDefinitions {
     static Lab lab;
     static Aminoacid aminoacid;
     static FullProt fullProt;
+    static Agent agent;
     static ProtSuit p1;
     static ProtSuit p2;
     static Sack s1;
     static Gloves g1;
     static Axe a1;
+    static Game game;
 
     @Given("a virologist and a safe house with a ProtSuit")
     public void virologistandsafehouse() {
@@ -98,6 +103,15 @@ public class StepDefinitions {
         fullProt = new FullProt("Cf", 5, null, 5, 5);
         lab = new Lab("Lab", fullProt, false, 0, 0);
         lab.Accept(v1);
+    }
+
+    @Given("the virologist has {string}")
+    public void theVirologistHasOblivion(String arg0) {
+        switch (arg0) {
+            case "Oblivion" -> agent = new Oblivion("Co", v1, 1, 1);
+            case "Paralysis" -> agent = new Oblivion("Cp", v1, 1, 1);
+            case "VirusDance" -> agent = new Oblivion("Cv", v1, 1, 1);
+        }
     }
 
 
@@ -173,5 +187,11 @@ public class StepDefinitions {
     @Then("the virologist gets the virus")
     public void theVirologistGetsTheVirus() {
         assertEquals(v1.getCodes().get(0).toString(), "Cf");
+    }
+
+
+    @Then("the game is over")
+    public void theGameIsOver() {
+        assertTrue(Game.gameEnded);
     }
 }

@@ -63,3 +63,13 @@ Feature: Virologist stepping and collecting equipment
     Given a virologist and a lab with a FullProt
     When the virologist picks up the virus
     Then the virologist gets the virus
+
+  Scenario: A virologist wins when collecting the final virus
+    Given a virologist and a lab with a FullProt
+    And the virologist has "Oblivion"
+    And the virologist has "Paralysis"
+    And the virologist has "VirusDance"
+    When the virologist picks up the virus
+    Then the game is over
+
+  
