@@ -1,8 +1,6 @@
 package cucumbertests;
 
-import agent.Agent;
-import agent.FullProt;
-import agent.Oblivion;
+import agent.*;
 import com.main.Game;
 import com.main.Virologist;
 import equipment.Axe;
@@ -20,6 +18,7 @@ import static org.junit.Assert.*;
 
 public class StepDefinitions {
     static Virologist v1;
+    static Virologist v2;
     static Simple simple;
     static SafeHouse safeHouse1;
     static SafeHouse safeHouse2;
@@ -109,9 +108,21 @@ public class StepDefinitions {
     public void theVirologistHasOblivion(String arg0) {
         switch (arg0) {
             case "Oblivion" -> agent = new Oblivion("Co", v1, 1, 1);
-            case "Paralysis" -> agent = new Oblivion("Cp", v1, 1, 1);
-            case "VirusDance" -> agent = new Oblivion("Cv", v1, 1, 1);
+            case "Paralysis" -> agent = new Paralysis("Cp", 3, v1, 1, 1);
+            case "VirusDance" -> agent = new VirusDance("Cv", v1, 1, 1);
         }
+    }
+
+    @Given("the virologist is paralized")
+    public void theVirologistIsParalized() {
+        agent = new Paralysis("Cp", 3, v1, 1, 1);
+        v1.AddEffect(agent);
+    }
+
+    @Given("another virologist")
+    public void anotherVirologist() {
+        v2 = new Virologist("Virologist2");
+        lab.Accept(v2);
     }
 
 
@@ -140,6 +151,10 @@ public class StepDefinitions {
         v1.Collect();
     }
 
+    @When("the second virologist tries to rob the first one")
+    public void theSecondVirologistTriesToRobTheFirstOne() {
+        v2.StealEqFrom(v1, g1);
+    }
 
 
     @Then("the virologist is in the safe house")
@@ -193,5 +208,17 @@ public class StepDefinitions {
     @Then("the game is over")
     public void theGameIsOver() {
         assertTrue(Game.gameEnded);
+    }
+
+
+    @Then("then first virologist no longer has the item")
+    public void thenFirstVirologistNoLongerHasTheItem() {
+        assertTrue(v1.getEquipments().isEmpty());
+    }
+
+    @And("the second virologist has the item")
+    public void theSecondVirologistHasTheItem() {
+        assertFalse(v2.getEquipments().isEmpty());
+        assertSame(v2.getEquipment(0), g1);
     }
 }

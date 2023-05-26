@@ -72,4 +72,11 @@ Feature: Virologist stepping and collecting equipment
     When the virologist picks up the virus
     Then the game is over
 
-  
+  Scenario: A virologist robs a paralized virologist
+    Given a virologist and a lab with a FullProt
+    And the virologist has a Glove
+    And the virologist is paralized
+    And another virologist
+    When the second virologist tries to rob the first one
+    Then then first virologist no longer has the item
+    And the second virologist has the item
