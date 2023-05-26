@@ -9,6 +9,7 @@ import field.Field;
 import field.SafeHouse;
 import field.Simple;
 import field.WareHouse;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -22,6 +23,8 @@ public class StepDefinitions {
     static SafeHouse safeHouse1;
     static SafeHouse safeHouse2;
     static SafeHouse safeHouse3;
+    static WareHouse warehouse1;
+    static Aminoacid aminoacid;
     static ProtSuit p1;
     static ProtSuit p2;
     static Sack s1;
@@ -68,6 +71,28 @@ public class StepDefinitions {
         v1.PickupEq(g1);
     }
 
+    @Given("a virologist and a warehouse with an amino acid")
+    public void aVirologistAndAWarehouseWithAnAminoAcid() {
+        v1 = new Virologist("Virologist");
+        aminoacid = new Aminoacid();
+        warehouse1 = new WareHouse(aminoacid, "warehouse1", 1, 1);
+        warehouse1.Accept(v1);
+    }
+    @Given("the virologist has 10 amino acids")
+    public void theVirologistHasAminoAcids() {
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+        v1.PickupResource(new Aminoacid());
+    }
+
+
     @When("the virologist steps on the safehouse with a ProtSuit")
     public void step1() {
         v1.Move("0");
@@ -82,6 +107,13 @@ public class StepDefinitions {
     public void step2() {
         v1.Move("1");
     }
+
+    @When("the virologist tries to pick up the amino acid")
+    public void theVirologistTriesToPickUpTheAminoAcid() {
+        v1.Collect();
+    }
+
+
 
     @Then("the virologist is in the safe house")
     public void virologistinsafehouse() {
@@ -118,5 +150,10 @@ public class StepDefinitions {
     @Then("the virologist has {int} equipments")
     public void theVirologistHasEquipments(int arg0) {
         assertEquals(v1.getEquipments().size(), arg0);
+    }
+
+    @Then("the amino acid stays on the field")
+    public void theAminoAcidStaysOnTheField() {
+        assertTrue(warehouse1.toString().contains("Ra"));
     }
 }

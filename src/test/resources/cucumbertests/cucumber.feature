@@ -51,3 +51,10 @@ Feature: Virologist stepping and collecting equipment
     Then the virologist is not on the first field
     And the virologist is not on the safe house with ProtSuit
     And the virologist is in the safe house with Axe
+
+
+  Scenario: A Virologist tries to collect too many resources
+    Given a virologist and a warehouse with an amino acid
+    And the virologist has 10 amino acids
+    When the virologist tries to pick up the amino acid
+    Then the amino acid stays on the field
