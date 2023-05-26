@@ -1,22 +1,11 @@
-package GUI;
+package gui;
 
 import com.main.Game;
 import com.main.Virologist;
 import field.Field;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.LinkedList;
 import java.util.ArrayList;
 
 public class Triangle extends JComponent {
@@ -25,8 +14,8 @@ public class Triangle extends JComponent {
     boolean inverted;
 
     int size;
-    int x;
-    int y;
+    int fieldX;
+    int fieldY;
     boolean filled;
     boolean alive;
     boolean toBeAlive;
@@ -52,8 +41,8 @@ public class Triangle extends JComponent {
         this.container = container;
         this.ref = ref;
         this.size = size;
-        this.x = xID;
-        this.y = yID;
+        this.fieldX = xID;
+        this.fieldY = yID;
         this.filled = filled;
         alive = false;
         toBeAlive = false;
@@ -77,14 +66,14 @@ public class Triangle extends JComponent {
      */
     public void changeIfU(int ix, int iy) {
         if(inverted) {
-            if(ix > x * size && ix < x * size + size && iy > y * size && iy < y * size + size && iy - y * size > ix - x * size) {
+            if(ix > fieldX * size && ix < fieldX * size + size && iy > fieldY * size && iy < fieldY * size + size && iy - fieldY * size > ix - fieldX * size) {
                 if(!Game.gameEnded){
                     new Thread(()->Game.step(this.ref.getId())).start();
                 }
             }
         }
         else {
-            if(ix > x * size && ix < x * size + size && iy > y * size && iy < y * size + size && iy - y * size < ix - x * size) {
+            if(ix > fieldX * size && ix < fieldX * size + size && iy > fieldY * size && iy < fieldY * size + size && iy - fieldY * size < ix - fieldX * size) {
                 if(!Game.gameEnded){
                     new Thread(()->Game.step(this.ref.getId())).start();
                 }
@@ -110,10 +99,10 @@ public class Triangle extends JComponent {
         g.setColor(new Color(73, 73, 73));
         g.drawPolygon(p);
         int i = 0;
-        container.drawItem(g, this.x, this.y, inverted, ref.mark());
+        container.drawItem(g, this.fieldX, this.fieldY, inverted, ref.mark());
         for (Virologist v : ref.virologist){
             container.removeVirologist(v.getId());
-            container.drawVirologist(g, this.x, this.y, inverted, i++, v.getId());
+            container.drawVirologist(g, this.fieldX, this.fieldY, inverted, i++, v.getId());
         }
     }
 }

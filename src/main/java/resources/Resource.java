@@ -13,6 +13,6 @@ public abstract class Resource{
 
     public abstract int availableNucleo();
 
-    abstract public String toString();
+    public abstract String toString();
 
 }

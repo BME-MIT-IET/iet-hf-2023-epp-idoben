@@ -20,10 +20,8 @@ public class WareHouse extends Field {
      */
     public void Collect (Virologist v){
         Skeleton.functionCall("WareHouse.PickupResource(Virologist v)  ID: " + id);
-        if(resources!=null) {
-            if (v.PickupResource(resources))
-                resources = null;
-        }
+        if(resources!=null && v.PickupResource(resources))
+            resources = null;
         Skeleton.functionReturn("WareHouse.PickupResource(Virologist v)  Return");
     }
 
