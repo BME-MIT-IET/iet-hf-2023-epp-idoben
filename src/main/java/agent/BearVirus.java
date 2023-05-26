@@ -25,6 +25,7 @@ public class BearVirus extends Agent {
     /**
      * Lépteti az effektet, ami véletlenszerű mozgásra készteti a virológust
      */
+    @Override
     public void Step(){
         owner.MoveRandom();
     }
@@ -32,6 +33,7 @@ public class BearVirus extends Agent {
     /**
      * @return Igazat ad vissza, mivel ez medvevírus és terjeszteni kell
      */
+    @Override
     public boolean SpreadBearVirus(){
         return true;
     }

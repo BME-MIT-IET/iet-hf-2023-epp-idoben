@@ -24,6 +24,7 @@ public class Paralysis extends Agent{
      * Ezen Effect hatására tud-e mozogni a virológus
      * @return - false, mivel bénít a hatása
      */
+    @Override
     public boolean Moveable(){
         return false;
     }
@@ -35,6 +36,7 @@ public class Paralysis extends Agent{
     /**
      * Lépteti az Paralysis számlálóját, majd ha az lejárt, akkor törli a paralysis-t
      */
+    @Override
     public void Step(){
         Skeleton.functionCall("Paralysis.Step()  ID: " + id);
         timetolive--;
