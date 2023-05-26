@@ -1,3 +1,5 @@
+package cucumbertests;
+
 import agent.FullProt;
 import com.main.Virologist;
 import equipment.Sack;
