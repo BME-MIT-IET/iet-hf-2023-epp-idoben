@@ -1,6 +1,6 @@
 # Manuális kód átvizsgálás +  Statikus analízis eszköz futtatása és jelzett hibák átnézése és javítása
 
-A feladat elvégzéséhez IntelliJ-ben használtuk a SonarLint plug-int, annak segítségével csináltuk a statikus kódanalízist, a gyakorlatokon látottak alapján kiindulva. A folyamat során törekedtünk arra, hogy minél különbözőbb fajta hibákat javítsunk ki, hogy minél nagyobb részét lefedhessük a hibáknak.
+A feladat elvégzéséhez IntelliJ-ben használtuk a SonarLint plug-int, annak segítségével csináltuk a statikus kódanalízist, a gyakorlatokon látottak alapján kiindulva. A folyamat során törekedtünk arra, hogy minél különbözőbb fajta hibákat javítsunk ki, hogy minél nagyobb részét lefedhessük a hibáknak. A feladatot Vass Annamária és Kiovics Dániel végezték.
 
 ## 1. lépés: SonarLint beüzemelése
 
