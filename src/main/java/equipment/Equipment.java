@@ -1,7 +1,6 @@
 package equipment;
 import com.main.Virologist;
 import timer.Steppable;
-import timer.Timer;
 import com.main.Skeleton;
 
 /**

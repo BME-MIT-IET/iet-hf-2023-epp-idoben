@@ -1,7 +1,6 @@
 package equipment;
 
 import com.main.Virologist;
-import timer.Timer;
 
 public class Axe extends Equipment{
     /**
@@ -19,6 +18,7 @@ public class Axe extends Equipment{
      *
      * @return Igazat ad vissza, mivel a baltával lehet ölni
      */
+    @Override
     public boolean Kills(){
         return timetolive==-1;
     }

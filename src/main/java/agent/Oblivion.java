@@ -26,6 +26,7 @@ public class Oblivion extends Agent{
     /**
      * Lépteti az Oblivion számlálóját, majd ha az lejárt, akkor törli a Oblivion-t
      */
+    @Override
     public void Step(){
         Skeleton.functionCall("Oblivion.Step()  ID: " + id);
         timetolive--;

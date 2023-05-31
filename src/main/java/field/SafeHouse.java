@@ -13,10 +13,8 @@ public class SafeHouse extends Field{
 
     public void Collect (Virologist v){
         com.main.Skeleton.functionCall("SafeHouse.Collect(Virologist v)");
-        if(equipment!=null) {
-            if (v.PickupEq(equipment))
-                equipment = null;
-        }
+        if(equipment!=null && v.PickupEq(equipment))
+            equipment = null;
         com.main.Skeleton.functionReturn("SafeHouse.Collect(Virologist v)  Return");
     }
 

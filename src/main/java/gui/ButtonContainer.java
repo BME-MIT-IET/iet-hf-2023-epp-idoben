@@ -1,10 +1,9 @@
-package GUI;
+package gui;
 
 import com.main.Game;
 import field.*;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 
