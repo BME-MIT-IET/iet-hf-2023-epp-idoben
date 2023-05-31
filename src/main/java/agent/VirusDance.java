@@ -27,6 +27,7 @@ public class VirusDance extends Agent{
     /**
      * Lépteti az VirusDance számlálóját, majd ha az lejárt, akkor törli a VirusDance-t
      */
+    @Override
     public void Step(){
         Skeleton.functionCall("VirusDance.Step()  ID: " + id);
         timetolive--;

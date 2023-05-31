@@ -24,6 +24,7 @@ public class FullProt extends Agent{
      * Ezen Effect hatására védve van-e a Virológus
      * @return - true, mivel véd a hatása
      */
+    @Override
     public boolean Protected(){
         Skeleton.functionCall("FullProt.Protected()  ID: " + id);
         Skeleton.functionReturn("FullProt.Protected()  Return true");
@@ -37,6 +38,7 @@ public class FullProt extends Agent{
     /**
      * Lépteti az FullProt számlálóját, majd ha az lejárt, akkor törli a FullProt-t
      */
+    @Override
     public void Step(){
         Skeleton.functionCall("FullProt.Step()  ID: " + id);
         timetolive--;

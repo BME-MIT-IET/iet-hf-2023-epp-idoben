@@ -28,7 +28,7 @@ public abstract class Field {
      * Konstruktor, beállítja az objektum nevét
      * @param name a neve
      */
-    public Field(String name, int x, int y){
+    protected Field(String name, int x, int y){
         this.x = x;
         this.y = y;
         id = name;
@@ -63,7 +63,8 @@ public abstract class Field {
     public String GetRandomNeighbor(){
         Set<String> keySet = neighbours.keySet();
         ArrayList<String> tmp = new ArrayList<String>(keySet);
-        return tmp.get((int)Math.floor(Math.random() * tmp.size()));
+        Random rnd = new Random();
+        return tmp.get(rnd.nextInt(tmp.size()));
     }
 
 

@@ -1,13 +1,8 @@
 package com.main;
 
-import GUI.MainWindow;
+import gui.MainWindow;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
-
-import static com.main.Game.*;
 
 public class Main {
     private static MainWindow window;
